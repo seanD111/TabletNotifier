@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+public class TabletInfo
+{
+    
+}
+
 namespace TabletNotifier
 {
     /// <summary>
@@ -25,39 +30,22 @@ namespace TabletNotifier
             InitializeComponent();
         }
 
-        private void InkCanvas_StylusDown(object sender, StylusDownEventArgs e)
+        private void InkCanvas_GeneralHandler(object sender, StylusDownEventArgs e)
         {
-
+            Console.WriteLine(e.ToString());
+        }
+        private void InkCanvas_GeneralHandler(object sender, StylusEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        private void InkCanvas_GeneralHandler(object sender, TouchEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        private void InkCanvas_GeneralHandler(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
         }
 
-        private void InkCanvas_StylusMove(object sender, StylusEventArgs e)
-        {
-
-        }
-
-        private void InkCanvas_StylusInAirMove(object sender, StylusEventArgs e)
-        {
-
-        }
-
-        private void InkCanvas_StylusUp(object sender, StylusEventArgs e)
-        {
-
-        }
-
-        private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
-        {
-
-        }
-
-        private void InkCanvas_TouchUp(object sender, TouchEventArgs e)
-        {
-
-        }
-
-        private void InkCanvas_TouchMove(object sender, TouchEventArgs e)
-        {
-
-        }
     }
 }

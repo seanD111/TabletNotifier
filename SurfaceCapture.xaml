@@ -1,0 +1,14 @@
+﻿<Window x:Class="TabletNotifier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TabletNotifier"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" WindowState="Maximized" Background="#00000000">
+    <Grid>
+        <!--<InkCanvas Background="#19FFFFFF" StylusDown="InkCanvas_StylusDown" StylusMove="InkCanvas_StylusMove" StylusInAirMove="InkCanvas_StylusInAirMove" StylusUp="InkCanvas_StylusUp" TouchDown="InkCanvas_TouchDown" TouchUp="InkCanvas_TouchUp" TouchMove="InkCanvas_TouchMove"/>-->
+        <InkCanvas Background="#19FFFFFF" PreviewMouseDown="InkCanvas_GeneralHandler" MouseUp="InkCanvas_GeneralHandler" StylusDown="InkCanvas_GeneralHandler" StylusMove="InkCanvas_GeneralHandler" StylusInAirMove="InkCanvas_GeneralHandler" StylusUp="InkCanvas_GeneralHandler" TouchDown="InkCanvas_GeneralHandler" TouchUp="InkCanvas_GeneralHandler" TouchMove="InkCanvas_GeneralHandler"/>
+
+    </Grid>
+</Window>
