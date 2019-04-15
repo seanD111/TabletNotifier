@@ -8,7 +8,17 @@
         Title="MainWindow" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" WindowState="Maximized" Background="#00000000">
     <Grid>
         <!--<InkCanvas Background="#19FFFFFF" StylusDown="InkCanvas_StylusDown" StylusMove="InkCanvas_StylusMove" StylusInAirMove="InkCanvas_StylusInAirMove" StylusUp="InkCanvas_StylusUp" TouchDown="InkCanvas_TouchDown" TouchUp="InkCanvas_TouchUp" TouchMove="InkCanvas_TouchMove"/>-->
-        <InkCanvas Background="#19FFFFFF" PreviewMouseDown="InkCanvas_GeneralHandler" MouseUp="InkCanvas_GeneralHandler" StylusDown="InkCanvas_GeneralHandler" StylusMove="InkCanvas_GeneralHandler" StylusInAirMove="InkCanvas_GeneralHandler" StylusUp="InkCanvas_GeneralHandler" TouchDown="InkCanvas_GeneralHandler" TouchUp="InkCanvas_GeneralHandler" TouchMove="InkCanvas_GeneralHandler"/>
+        <InkCanvas Background="#19FFFFFF" 
+                   StylusDown="InkCanvas_StylusDown" 
+                   StylusUp="InkCanvas_StylusUp"
+                   StylusMove="InkCanvas_StylusMove"
+                   StylusInAirMove="InkCanvas_StylusInAirMove"
+                   TouchDown="InkCanvas_TouchDown"
+                   TouchUp="InkCanvas_TouchUp"
+                   TouchMove="InkCanvas_TouchMove"
+                   StylusButtonDown="InkCanvas_StylusButtonDown"
+                   StylusButtonUp="InkCanvas_StylusButtonUp"
+        />
 
     </Grid>
 </Window>
