@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TabletNotifier"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         Title="MainWindow" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" WindowState="Maximized" Background="#00000000">
     <Grid>
         <!--<InkCanvas Background="#19FFFFFF" StylusDown="InkCanvas_StylusDown" StylusMove="InkCanvas_StylusMove" StylusInAirMove="InkCanvas_StylusInAirMove" StylusUp="InkCanvas_StylusUp" TouchDown="InkCanvas_TouchDown" TouchUp="InkCanvas_TouchUp" TouchMove="InkCanvas_TouchMove"/>-->

@@ -24,25 +24,30 @@ namespace TabletNotifier
     /// </summary>
     public partial class MainWindow : Window
     {
-        public TabletStateClient tabletState = new TabletStateClient();
+        App currentApp = Application.Current as App;
 
         public MainWindow()
         {
             InitializeComponent();
-
+                       
         }
 
+
+        /// <summary>
+        /// Common functionality for all Stylus, Touch, and StylusButton Event handlers
+        /// </summary>
+        /// <param name="e"></param>
         private void GeneralStylusEventHandler(StylusEventArgs e)
         {
             StylusPoint point = e.GetStylusPoints(this).Last();
-            tabletState.update(point);
+            currentApp.tabletState.Update(point);
             e.Handled = true;
         }
 
         private void GeneralTouchEventHandler(TouchEventArgs e)
         {
             TouchPoint point = e.GetTouchPoint(this);
-            tabletState.update(point);
+            currentApp.tabletState.Update(point);
             e.Handled = true;
         }
 
@@ -52,24 +57,29 @@ namespace TabletNotifier
 
             if (myStylusButton.Guid == StylusPointProperties.BarrelButton.Id)
             {
-                tabletState.update("/input/stylus/barrel/click", isPressed);
+                currentApp.tabletState.Update("/input/stylus/barrel/click", isPressed);
             }
             else if (myStylusButton.Guid == StylusPointProperties.TipButton.Id)
             {
-                tabletState.update("/input/stylus/eraser/click", isPressed);
+                currentApp.tabletState.Update("/input/stylus/eraser/click", isPressed);
             }
             e.Handled = true;
         }
 
+        /// <summary>
+        /// All handlers for application stylus/touch/button logging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InkCanvas_StylusDown(object sender, StylusDownEventArgs e)
         {
-            tabletState.update("/input/stylus/surface/touch", true);
+            currentApp.tabletState.Update("/input/stylus/surface/touch", true);
             GeneralStylusEventHandler(e);
         }
 
         private void InkCanvas_StylusUp(object sender, StylusEventArgs e)
         {
-            tabletState.update("/input/stylus/surface/touch", false);
+            currentApp.tabletState.Update("/input/stylus/surface/touch", false);
             GeneralStylusEventHandler(e);
         }
 
@@ -85,13 +95,13 @@ namespace TabletNotifier
 
         private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
         {
-            tabletState.update("/input/finger/1/surface/touch", true);
+            currentApp.tabletState.Update("/input/finger/1/surface/touch", true);
             GeneralTouchEventHandler(e);
         }
 
         private void InkCanvas_TouchUp(object sender, TouchEventArgs e)
         {
-            tabletState.update("/input/finger/1/surface/touch", false);
+            currentApp.tabletState.Update("/input/finger/1/surface/touch", false);
             GeneralTouchEventHandler(e);
         }
 
@@ -110,5 +120,10 @@ namespace TabletNotifier
             GeneralButtonEventHandler(e, false);
         }
 
+        //close the entire app when the capture window closes
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            currentApp.Shutdown();
+        }
     }
 }

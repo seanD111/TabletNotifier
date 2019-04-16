@@ -13,5 +13,15 @@ namespace TabletNotifier
     /// </summary>
     public partial class App : Application
     {
+        public TabletStateClient tabletState = new TabletStateClient();
+
+        //on application close, try to clean up connections
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            if (tabletState.IsConnected)
+            {
+                tabletState.oscTransmitter.Close();
+            }
+        }
     }
 }

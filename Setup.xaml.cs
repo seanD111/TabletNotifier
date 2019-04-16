@@ -19,9 +19,24 @@ namespace TabletNotifier
     /// </summary>
     public partial class Setup : Window
     {
+        App currentApp = Application.Current as App;
         public Setup()
         {
             InitializeComponent();
+        }
+
+        private void Btn_connect_Click(object sender, RoutedEventArgs e)
+        {
+            int port = int.Parse(tb_port.Text);
+            string ip = tb_ip.Text;
+            string name = tb_tabletName.Text;
+            currentApp.tabletState.Connect(name, ip, port);
+
+            MainWindow main = new MainWindow();
+            App.Current.MainWindow = main;
+            this.Close();
+            main.Show();
+
         }
     }
 }
