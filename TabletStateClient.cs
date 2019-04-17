@@ -111,7 +111,7 @@ namespace TabletNotifier
             if (d_Components.ContainsKey(key))
             {
                 d_Components[key] = value;
-                    Debug.WriteLine(d_Components);
+
                 if (IsConnectedOSC)
                 {
                     SendOSCMessage(key, value);
@@ -130,7 +130,7 @@ namespace TabletNotifier
             if (b_Components.ContainsKey(key))
             {
                 b_Components[key] = value;
-                    Debug.WriteLine(b_Components);
+
                 if (IsConnectedOSC)
                 {
                     SendOSCMessage(key, value);
