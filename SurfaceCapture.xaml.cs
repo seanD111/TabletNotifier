@@ -41,21 +41,20 @@ namespace TabletNotifier
         {
             StylusPoint point = e.GetStylusPoints(this).Last();
             currentApp.tabletState.Update(point);
-            e.Handled = true;
+           
         }
 
         private void GeneralMouseEventHandler(MouseEventArgs e)
         {
             Point point = e.GetPosition(this);
             currentApp.tabletState.Update(point);
-            e.Handled = true;
+            
         }
 
         private void GeneralTouchEventHandler(TouchEventArgs e)
         {
             TouchPoint point = e.GetTouchPoint(this);
-            currentApp.tabletState.Update(point);
-            e.Handled = true;
+            currentApp.tabletState.Update(point);            
         }
 
         private void GeneralButtonEventHandler(StylusButtonEventArgs e, bool isPressed)
@@ -80,24 +79,37 @@ namespace TabletNotifier
         /// <param name="e"></param>
         private void InkCanvas_StylusDown(object sender, StylusDownEventArgs e)
         {
-            currentApp.tabletState.Update("/input/stylus/surface/touch", true);
-            GeneralStylusEventHandler(e);
+            if (IsStylus(e))
+            {
+                currentApp.tabletState.Update("/input/stylus/surface/touch", true);
+                GeneralStylusEventHandler(e);
+            }
         }
 
         private void InkCanvas_StylusUp(object sender, StylusEventArgs e)
         {
-            currentApp.tabletState.Update("/input/stylus/surface/touch", false);
-            GeneralStylusEventHandler(e);
+            if (IsStylus(e))
+            {
+                currentApp.tabletState.Update("/input/stylus/surface/touch", false);
+                GeneralStylusEventHandler(e);
+
+            }
         }
 
         private void InkCanvas_StylusMove(object sender, StylusEventArgs e)
         {
-            GeneralStylusEventHandler(e);
+            if (IsStylus(e))
+            {
+                GeneralStylusEventHandler(e);
+            }
         }
 
         private void InkCanvas_StylusInAirMove(object sender, StylusEventArgs e)
         {
-            GeneralStylusEventHandler(e);
+            if (IsStylus(e))
+            {
+                GeneralStylusEventHandler(e);
+            }
         }
 
         private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
@@ -127,26 +139,63 @@ namespace TabletNotifier
             GeneralButtonEventHandler(e, false);
         }
 
+        private void InkCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsMouse(e))
+            {
+                currentApp.tabletState.Update("/input/mouse/surface/touch", true);
+                GeneralMouseEventHandler(e);
+            }
+        }
+
+        private void InkCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsMouse(e))
+            {
+                GeneralMouseEventHandler(e);
+
+            }
+        }
+
+        private void InkCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (IsMouse(e))
+            {
+                currentApp.tabletState.Update("/input/mouse/surface/touch", false);
+                GeneralMouseEventHandler(e);
+            }
+        }
+
+        private bool IsMouse(MouseEventArgs e)
+        {
+            if(e.StylusDevice== null && e.MouseDevice != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        private bool IsStylus(StylusEventArgs e)
+        {
+            if (e.StylusDevice != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //close the entire app when the capture window closes
         private void Window_Closed(object sender, EventArgs e)
         {
             currentApp.Shutdown();
         }
-        private void InkCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            currentApp.tabletState.Update("/input/mouse/surface/touch", true);
-            GeneralMouseEventHandler(e);
-        }
 
-        private void InkCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            GeneralMouseEventHandler(e);
-        }
-
-        private void InkCanvas_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            currentApp.tabletState.Update("/input/mouse/surface/touch", false);
-            GeneralMouseEventHandler(e);
-        }
     }
 }
