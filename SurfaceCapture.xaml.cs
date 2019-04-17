@@ -49,13 +49,14 @@ namespace TabletNotifier
         {
             Point point = e.GetPosition(this);
             currentApp.tabletState.Update(point);
-            
+            e.Handled = true;
         }
 
         private void GeneralTouchEventHandler(TouchEventArgs e)
         {
             TouchPoint point = e.GetTouchPoint(this);
-            currentApp.tabletState.Update(point);            
+            currentApp.tabletState.Update(point);
+            e.Handled = true;
         }
 
         private void GeneralButtonEventHandler(StylusButtonEventArgs e, bool isPressed)
@@ -191,7 +192,6 @@ namespace TabletNotifier
 
         private bool IsTouch(TouchEventArgs e)
         {
-            Debug.WriteLine(e.GetType());
             if (e.TouchDevice != null)
             {
                 return true;

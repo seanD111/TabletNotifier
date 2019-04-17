@@ -10,18 +10,18 @@
     <Grid>
         <!--<InkCanvas Background="#19FFFFFF" StylusDown="InkCanvas_StylusDown" StylusMove="InkCanvas_StylusMove" StylusInAirMove="InkCanvas_StylusInAirMove" StylusUp="InkCanvas_StylusUp" TouchDown="InkCanvas_TouchDown" TouchUp="InkCanvas_TouchUp" TouchMove="InkCanvas_TouchMove"/>-->
         <InkCanvas Background="#19FFFFFF" 
-                   StylusDown="InkCanvas_StylusDown" 
-                   StylusUp="InkCanvas_StylusUp"
-                   StylusMove="InkCanvas_StylusMove"
-                   StylusInAirMove="InkCanvas_StylusInAirMove"
-                   TouchDown="InkCanvas_TouchDown"
-                   TouchUp="InkCanvas_TouchUp"
-                   TouchMove="InkCanvas_TouchMove"
-                   StylusButtonDown="InkCanvas_StylusButtonDown"
-                   StylusButtonUp="InkCanvas_StylusButtonUp"
+                   PreviewStylusDown="InkCanvas_StylusDown" 
+                   PreviewStylusUp="InkCanvas_StylusUp"
+                   PreviewStylusMove="InkCanvas_StylusMove"
+                   PreviewStylusInAirMove="InkCanvas_StylusInAirMove"
+                   PreviewTouchDown="InkCanvas_TouchDown"
+                   PreviewTouchUp="InkCanvas_TouchUp"
+                   PreviewTouchMove="InkCanvas_TouchMove"
+                   PreviewStylusButtonDown="InkCanvas_StylusButtonDown"
+                   PreviewStylusButtonUp="InkCanvas_StylusButtonUp"
                    PreviewMouseDown ="InkCanvas_MouseDown"
-                   MouseMove="InkCanvas_MouseMove"
-                   MouseUp="InkCanvas_MouseUp"
+                   PreviewMouseMove="InkCanvas_MouseMove"
+                   PreviewMouseUp="InkCanvas_MouseUp"
         />
 
     </Grid>
