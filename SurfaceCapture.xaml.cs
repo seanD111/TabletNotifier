@@ -65,7 +65,7 @@ namespace TabletNotifier
             {
                 currentApp.tabletState.Update("/input/stylus/barrel/click", isPressed);
             }
-            else if (myStylusButton.Guid == StylusPointProperties.TipButton.Id)
+            else if (myStylusButton.Guid == StylusPointProperties.SecondaryTipButton.Id)
             {
                 currentApp.tabletState.Update("/input/stylus/eraser/click", isPressed);
             }
@@ -114,19 +114,29 @@ namespace TabletNotifier
 
         private void InkCanvas_TouchDown(object sender, TouchEventArgs e)
         {
-            currentApp.tabletState.Update("/input/finger/1/surface/touch", true);
-            GeneralTouchEventHandler(e);
+            if (IsTouch(e))
+            {
+
+                currentApp.tabletState.Update("/input/finger/1/surface/touch", true);
+                GeneralTouchEventHandler(e);
+            }
         }
 
         private void InkCanvas_TouchUp(object sender, TouchEventArgs e)
         {
-            currentApp.tabletState.Update("/input/finger/1/surface/touch", false);
-            GeneralTouchEventHandler(e);
+            if (IsTouch(e))
+            {
+                currentApp.tabletState.Update("/input/finger/1/surface/touch", false);
+                GeneralTouchEventHandler(e);
+            }
         }
 
         private void InkCanvas_TouchMove(object sender, TouchEventArgs e)
         {
-            GeneralTouchEventHandler(e);
+            if (IsTouch(e))
+            {
+                GeneralTouchEventHandler(e);
+            }
         }
 
         private void InkCanvas_StylusButtonDown(object sender, StylusButtonEventArgs e)
@@ -169,6 +179,18 @@ namespace TabletNotifier
         private bool IsMouse(MouseEventArgs e)
         {
             if(e.StylusDevice== null && e.MouseDevice != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IsTouch(TouchEventArgs e)
+        {
+            if (e.TouchDevice != null)
             {
                 return true;
             }
