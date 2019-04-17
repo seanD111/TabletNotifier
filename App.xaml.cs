@@ -18,7 +18,7 @@ namespace TabletNotifier
         //on application close, try to clean up connections
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            if (tabletState.IsConnected)
+            if (tabletState.IsConnectedOSC)
             {
                 tabletState.oscTransmitter.Close();
             }

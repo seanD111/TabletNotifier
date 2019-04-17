@@ -55,10 +55,10 @@ namespace VVVV.Utils.OSC
         protected const char CHAR	  = 'c'; // bit
         protected const char COLOR  = 'r'; // 4x8bit -> rgba
 
-        //protected const char TRUE	  = 'T';
-        //protected const char FALSE = 'F';
+        protected const char TRUE	  = 'T';
+        protected const char FALSE = 'F';
         protected const char NIL = 'N';
-        //protected const char INFINITUM = 'I';
+        protected const char INFINITUM = 'I';
 
         //protected const char ALL     = '*';
 
@@ -193,6 +193,17 @@ namespace VVVV.Utils.OSC
             else if (value is DateTime)
             {
                 AppendTag(TIMETAG);
+            }
+            else if (value is bool)
+            {
+                if ((bool)value)
+                {
+                    AppendTag(TRUE);
+                }
+                else
+                {
+                    AppendTag(FALSE);
+                }
             }
             //else if (value is RGBAColor)
             //{

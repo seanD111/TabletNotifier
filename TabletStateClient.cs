@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using VVVV.Utils.OSC;
+using System.Diagnostics;
 
 /* Reference of the possible input components:
 
@@ -37,11 +38,13 @@ namespace TabletNotifier
         public AsynchronousClient client;
         public OSCTransmitter oscTransmitter;
         public string TabletName { get; private set; }
-        public bool IsConnected { get; private set; }
+        public bool IsConnectedOSC { get; private set; }
 
         //Dictionary for possible double components
         public Dictionary<string, double> d_Components = new Dictionary<string, double>
         {
+            {"/input/mouse/position/x", 0d},
+            {"/input/mouse/position/y", 0d},
             {"/input/stylus/position/x", 0d},
             {"/input/stylus/position/y", 0d},
             {"/input/stylus/surface/value", 0d},
@@ -59,16 +62,25 @@ namespace TabletNotifier
             {"/input/stylus/barrel/click", false},
             {"/input/stylus/eraser/click", false},
             {"/input/stylus/surface/touch", false},
+            {"/input/mouse/surface/touch", false},
             {"/input/finger/1/surface/touch", false}
         };
 
 
         public TabletStateClient()
         {
-            IsConnected = false;
+            IsConnectedOSC = false;
 
         }
-        
+
+
+        //when a mouse point is received, update the mouse coordinates
+        public void Update(Point point)
+        {
+            Update("/input/mouse/position/x", point.X);
+            Update("/input/mouse/position/y", point.Y);
+        }
+
         //when a stylus point is received, update the stylus pressure and coordinates
         public void Update(StylusPoint point)
         {
@@ -99,6 +111,11 @@ namespace TabletNotifier
             if (d_Components.ContainsKey(key))
             {
                 d_Components[key] = value;
+                    Debug.WriteLine(d_Components);
+                if (IsConnectedOSC)
+                {
+                    SendOSCMessage(key, value);
+                }
             }
         }
 
@@ -113,15 +130,36 @@ namespace TabletNotifier
             if (b_Components.ContainsKey(key))
             {
                 b_Components[key] = value;
+                    Debug.WriteLine(b_Components);
+                if (IsConnectedOSC)
+                {
+                    SendOSCMessage(key, value);
+                }
             }
         }
+
 
 
         public void Connect(string name, string ip, Int32 port)
         {
             TabletName = name;
             oscTransmitter = new OSCTransmitter(ip, port);
-            IsConnected = true;
+            IsConnectedOSC = true;
+        }
+
+        public void SendOSCMessage(string key, bool value)
+        {
+            string address = $"{TabletName}{key}";
+            OSCMessage msg = new OSCMessage(address, value, false);
+            oscTransmitter.Send(msg);
+
+        }
+        public void SendOSCMessage(string key, double value)
+        {
+            string address = $"{TabletName}{key}";
+            OSCMessage msg = new OSCMessage(address, value);
+            oscTransmitter.Send(msg);
+
         }
 
     }

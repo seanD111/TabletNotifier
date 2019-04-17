@@ -44,6 +44,13 @@ namespace TabletNotifier
             e.Handled = true;
         }
 
+        private void GeneralMouseEventHandler(MouseEventArgs e)
+        {
+            Point point = e.GetPosition(this);
+            currentApp.tabletState.Update(point);
+            e.Handled = true;
+        }
+
         private void GeneralTouchEventHandler(TouchEventArgs e)
         {
             TouchPoint point = e.GetTouchPoint(this);
@@ -124,6 +131,22 @@ namespace TabletNotifier
         private void Window_Closed(object sender, EventArgs e)
         {
             currentApp.Shutdown();
+        }
+        private void InkCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            currentApp.tabletState.Update("/input/mouse/surface/touch", true);
+            GeneralMouseEventHandler(e);
+        }
+
+        private void InkCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            GeneralMouseEventHandler(e);
+        }
+
+        private void InkCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            currentApp.tabletState.Update("/input/mouse/surface/touch", false);
+            GeneralMouseEventHandler(e);
         }
     }
 }

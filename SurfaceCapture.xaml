@@ -19,6 +19,9 @@
                    TouchMove="InkCanvas_TouchMove"
                    StylusButtonDown="InkCanvas_StylusButtonDown"
                    StylusButtonUp="InkCanvas_StylusButtonUp"
+                   PreviewMouseDown ="InkCanvas_MouseDown"
+                   MouseMove="InkCanvas_MouseMove"
+                   MouseUp="InkCanvas_MouseUp"
         />
 
     </Grid>

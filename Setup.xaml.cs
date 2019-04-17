@@ -30,12 +30,18 @@ namespace TabletNotifier
             int port = int.Parse(tb_port.Text);
             string ip = tb_ip.Text;
             string name = tb_tabletName.Text;
-            currentApp.tabletState.Connect(name, ip, port);
 
-            MainWindow main = new MainWindow();
-            App.Current.MainWindow = main;
-            this.Close();
-            main.Show();
+            //TODO: better port/ip/connection error handling
+            if (!string.IsNullOrEmpty(name))
+            {
+                currentApp.tabletState.Connect(name, ip, port);
+
+                MainWindow main = new MainWindow();
+                App.Current.MainWindow = main;
+                this.Close();
+                main.Show();
+
+            }
 
         }
     }
