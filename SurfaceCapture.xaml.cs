@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,6 +191,7 @@ namespace TabletNotifier
 
         private bool IsTouch(TouchEventArgs e)
         {
+            Debug.WriteLine(e.GetType());
             if (e.TouchDevice != null)
             {
                 return true;
