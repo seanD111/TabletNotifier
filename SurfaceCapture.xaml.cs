@@ -178,6 +178,7 @@ namespace TabletNotifier
             }
         }
 
+        //There might be better ways for determing which input type is what
         private bool IsMouse(MouseEventArgs e)
         {
             if(e.StylusDevice== null && e.MouseDevice != null)
@@ -205,7 +206,7 @@ namespace TabletNotifier
 
         private bool IsStylus(StylusEventArgs e)
         {
-            if (e.StylusDevice != null)
+            if (e.StylusDevice.TabletDevice.Type == TabletDeviceType.Stylus)
             {
                 return true;
             }
