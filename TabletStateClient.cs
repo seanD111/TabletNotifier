@@ -15,6 +15,8 @@ using System.Diagnostics;
     "/input/surface/size/x"
 
     Scalar:
+    "/input/mouse/position/x"
+    "/input/mouse/position/y"
     "/input/stylus/position/x"
     "/input/stylus/position/y"
     "/input/finger/1/position/x" 
@@ -27,6 +29,7 @@ using System.Diagnostics;
     "/input/stylus/barrel/click"
     "/input/stylus/eraser/click"
     "/input/stylus/surface/touch"
+    "/input/mouse/surface/touch"
     "/input/finger/1/surface/touch"
 */
 
@@ -149,14 +152,14 @@ namespace TabletNotifier
 
         public void SendOSCMessage(string key, bool value)
         {
-            string address = $"{TabletName}{key}";
+            string address = $"/{TabletName}{key}";
             OSCMessage msg = new OSCMessage(address, value, false);
             oscTransmitter.Send(msg);
 
         }
         public void SendOSCMessage(string key, double value)
         {
-            string address = $"{TabletName}{key}";
+            string address = $"/{TabletName}{key}";
             OSCMessage msg = new OSCMessage(address, value);
             oscTransmitter.Send(msg);
 
