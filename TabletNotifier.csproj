@@ -58,13 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="OSC\OSCAddressPattern.cs" />
-    <Compile Include="OSC\OSCBundle.cs" />
-    <Compile Include="OSC\OSCMessage.cs" />
-    <Compile Include="OSC\OSCPacket.cs" />
-    <Compile Include="OSC\OSCReceiver.cs" />
-    <Compile Include="OSC\OSCTimeTag.cs" />
-    <Compile Include="OSC\OSCTransmitter.cs" />
     <Compile Include="Setup.xaml.cs">
       <DependentUpon>Setup.xaml</DependentUpon>
     </Compile>
@@ -77,7 +70,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AsyncClient.cs" />
     <Compile Include="SurfaceCapture.xaml.cs">
       <DependentUpon>SurfaceCapture.xaml</DependentUpon>
       <SubType>Code</SubType>

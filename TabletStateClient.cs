@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using VVVV.Utils.OSC;
 using System.Diagnostics;
 
 /* Reference of the possible input components:
